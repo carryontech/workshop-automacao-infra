@@ -1,3 +1,4 @@
+# Autor: CarryOn Tech
 exec { "apt-update":
   command => "/usr/bin/apt-get update"
 }
@@ -23,7 +24,7 @@ exec { ["copyfiles"]:
   notify => Service["apache2"]
 }
 
-package { ["php5"]:
+package { ["php5","php5-mysql","php5-sybase"]:
   ensure => installed,
   notify => Service["apache2"]
 }
