@@ -15,6 +15,17 @@ service { "mysql":
     require => Package["mysql-server"]
 }
 
+# Liberando acesso remoto para que a instância app possa se conectar ao banco
+
+exec { "liberaracessoremoto":
+    command => "sed -i 's/bind-address/#bind-address/' /etc/mysql/my.cnf",
+    path => "/bin",
+    require => Package["mysql-server"],
+    notify => Service["mysql"]
+}
+
+
+
 # Criando o banco de dados com o nome agenda
 exec {"criarbanco":
   command => "mysqladmin -u root create agenda",
