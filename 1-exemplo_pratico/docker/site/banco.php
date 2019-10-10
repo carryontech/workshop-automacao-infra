@@ -3,8 +3,8 @@
 class Banco
 {
     private static $dbNome = 'agenda';
-    private static $dbHost = '192.168.50.11';
-    private static $dbUsuario = 'agenda';
+    private static $dbHost = 'banco';
+    private static $dbUsuario = 'root';
     private static $dbSenha = 'agenda';
     
     private static $cont = null;

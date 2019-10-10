@@ -1,6 +1,24 @@
-version: '3'
+version: '3.4'
 
 services:
+    banco:
+        image: mysql:5.7
+        container_name: banco
+        ports:
+            - "3306:3306"
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: agenda
+            MYSQL_DATABASE: agenda
+            MYSQL_USER: user
+            MYSQL_PASSWORD: userpassword
+        volumes:
+            - ./data:/var/lib/mysql
+            - ./pessoa.sql:/docker-entrypoint-initdb.d/pessoa.sql
+        networks:
+            - site-network
+
     web:
         image: nginx:latest
         container_name: aplicacao
@@ -14,13 +32,12 @@ services:
         links:
             - php
     php:
-        image: php:fpm
+        image: php-pdo-carryon
         container_name: php
         volumes:
             - ./site:/site
         networks:
             - site-network
-
 networks:
     site-network:
         driver: bridge
