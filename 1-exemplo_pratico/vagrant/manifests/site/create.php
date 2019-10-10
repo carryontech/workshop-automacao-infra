@@ -159,7 +159,6 @@
             $q = $pdo->prepare($sql);
             $q->execute(array($nome,$endereco,$telefone,$email,$sexo));
             Banco::desconectar();
-            header("Location: index.php");
         }
     }
 ?>
