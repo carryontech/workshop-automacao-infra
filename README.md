@@ -10,7 +10,7 @@ Neste repositório, estão os arquivos utilizados durante a apresentação e dem
 - Na raiz do repositório você irá encontrar o arquivo da apresentação utilizada no workshop.
 
 # Vagrant + Puppet
-- Neste projeto, foi provisionado um ambiente contendo dois servidores. Um servidor contendo o  Apache hospedando um site simples de cadastro de pessoas e um outro servidor contendo o banco de dados MySQL, onde são persistidos os dados cadastrados por meio do site.
+- Neste projeto, foi provisionado um ambiente contendo dois servidores. Um servidor contendo o  Apache hospedando um site simples de cadastro de pessoas (uma espécie de agenda online) e um outro servidor contendo o banco de dados MySQL, onde são persistidos os dados cadastrados por meio do site. No servidor do MySQL foi criado um banco de dados chamado "agenda" com uma tabela apenas, chamada "pessoa".
 - O provider utilizado para a criação das máquinas foi o VirtualBox.
 - O Vagrantfile está no diretório "workshop-automacao-infra/1-exemplo_pratico/vagrant/"
 - O site com CRUD simples usado nos testes está na pasta "1-exemplo_pratico/manifests/site/" e foi baseado no projeto da Glaucia Lemos: https://github.com/glaucia86/projeto.crud.php
@@ -35,6 +35,9 @@ Neste repositório, estão os arquivos utilizados durante a apresentação e dem
 - Dentro da pasta  1-exemplo_pratico/docker/ você irá encontrar o seguinte conteúdo:
   - Arquivo site.conf - Este é um arquivo de configuração do NGINX, que informa ao servidor web qual é o nome da aplicação, onde ela deve procurar o index do site, onde devem ser salvos os arquivos de log, dentre outras configurações.
   - Arquivo Dockerfile - Esté o arquivo utilzado para fazer o build de nossa imagem do PHP. Neste arquivo constam as instruções para que o comando "docker build" possa baixar a imagem do PHP, instalar o driver PDO e criar uma nova imagem que aqui chamamos de "php-pdo-carryon".
-  - Arquivo docker-compose.yml - Neste arquivo estão todas as instruções para a composição do ambiente. Nele, cada container é tratado como um serviço. Sendo assim, em cada um desses serviços são especificados: A imagem utilizada para rodar o container, o nome do container, a porta a ser exposta, variáveis de ambiente, volumes compartilhados, dentre outras configurações.
+  - Arquivo docker-compose.yml - Neste arquivo estão todas as instruções para a composição do ambiente. Nele, cada container é tratado como um serviço. Sendo assim, em cada um desses serviços estão especificados: A imagem utilizada para rodar o container, o nome do container, a porta a ser exposta, variáveis de ambiente, volumes compartilhados, dentre outras configurações.
+  - Arquivo pessoa.sql - Conforme já dito, neste exemplo foi configurado um ambiente contendo um site que funciona como uma agenda online e um banco de dados MySQL. Assim como no exemplo de Vagrant+Puppet, foi criado um banco de dados chamado "agenda" com uma tabela chamada "pessoa". O arquivo "pessoa.sql" então será enviado para o container do MySQL e executado automaticamente para criar a tabela pessoa no banco de dados "agenda".
+  - Diretório "data" - Esta pasta foi criada para funcionar como um volume compartilhado entre o container do MySQL e o host para que os arquivos do banco de dados também estejam disponíveis localmente. Essa pasta foi especificada dentro do arquivo docker-compose.yml.
+  - 
 
 
