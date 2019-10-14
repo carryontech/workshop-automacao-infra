@@ -53,4 +53,5 @@ Neste repositório, estão os arquivos utilizados durante a apresentação e dem
 - O comando acima irá criar, a partir da imagem oficial do PHP, uma imagem chamada php-pdo-carryon contendo o PHP e o driver PDO , para isso, o docker build irá ler as instruções contidas no arquivo Dockerfile. O ponto ao final do comando serve para especificar que o Dockerfile está no diretório corrente.
 - Finalizada a execução do docker build, execute o comando: docker-compose up
 - Este comando irá ler o arquivo docker-compose.yml e compor todo o ambiente exatamente como especificado neste arquivo.
+- Para testar o funcionamento, basta acessar o endereço: http://localhost:8080
 
