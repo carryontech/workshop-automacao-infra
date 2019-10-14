@@ -1,43 +1,61 @@
 version: '3.4'
 
 services:
+# Descrevendo o serviço do banco de dados
     banco:
+        # Imagem utilizada
         image: mysql:5.7
         container_name: banco
+        # Expondo a porta 3306
         ports:
             - "3306:3306"
+        # Carregando o plugin de autenticação do mysql
         command: --default-authentication-plugin=mysql_native_password
-        restart: always
+        # Definindo as variáveis de ambiente que informam o nome do banco de dados a ser criado, a senha root, além do usuário e senha do banco
         environment:
             MYSQL_ROOT_PASSWORD: agenda
             MYSQL_DATABASE: agenda
             MYSQL_USER: user
             MYSQL_PASSWORD: userpassword
+        # Mapeando o diretório "data" que está no host para dentro da pasta /var/lib/mysql do container
         volumes:
             - ./data:/var/lib/mysql
+            # Criando uma cópia do script pessoa.sql dentro do container. Esse script irá criar a tabela "pessoa" dentro do banco de dados "agenda"
+            # Scripts dentro da pasta docker-entrypoint-initdb.d são iniciados automaticamente com o container
             - ./pessoa.sql:/docker-entrypoint-initdb.d/pessoa.sql
+        # Declarando que o container fará parte da rede "site-network"
         networks:
             - site-network
 
+# Descrevendo o serviço da aplicação
     web:
+        # Imagem utilizada
         image: nginx:latest
         container_name: aplicacao
+        # Expondo a porta 8080. Internamente o serviço do NGINX responde na porta 80, porém ele será acessado pela 8080
         ports:
             - "8080:80"
+        # Mapeando a pasta que contém o site para dentro da pasta /site do container
         volumes:
             - ./site:/site
+            # Criando uma cópia do arquivo site.conf (arquivo de configuração do NGNIX) para dentro da pasta /etc/nginx/conf.d/ com o nome de default.conf
             - ./site.conf:/etc/nginx/conf.d/default.conf
         networks:
             - site-network
+        # Associando o serviço do NGINX ao serviço do PHP
         links:
             - php
+# Descrevendo o serviço do PHP
     php:
+        # Imagem utilizada (a que criamos via docker build)
         image: php-pdo-carryon
         container_name: php
+        # Mapeando a pasta que contém o site para dentro da pasta /site do container
         volumes:
             - ./site:/site
         networks:
             - site-network
+# Criando a rede "site-networks"
 networks:
     site-network:
         driver: bridge
