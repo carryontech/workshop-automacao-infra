@@ -24,3 +24,6 @@ Neste repositório, estão os arquivos utilizados durante a apresentação e dem
 - Para executar o projeto, basta clonar este repositório, navegar até o diretório "workshop-automacao-infra/1-exemplo_pratico/vagrant/" e executar o comando vagrant up. Esse comando irá executar as intruções contidas no Vagrantfile para criar as máquinas virtuais. Conforme vocês vão ver dentro do Vagrantfile, na configuração de cada uma das máquinas existe uma linha chamando o Puppet. É o Puppet quem vai provisionar os recursos necessários em cada servidor, como o Apache, o PHP e o MySQL Server.
 - Após executar o vagrant up, você deve acessar o endereço http://192.168.50.10/site/ para validar o funcionamento.
 - A máquina do site estará com o IP 192.168.50.10 e a máquina de banco de dados estará com o IP 192.168.50.11
+
+
+# Docker, docker build e Docker Compose
