@@ -27,10 +27,14 @@ Neste repositório, estão os arquivos utilizados durante a apresentação e dem
 
 
 # Docker, docker build e Docker Compose
-- Neste projeto, foi provisionado um ambiente contendo o mesmo site utilizado no exemplo de Vagrant+Puppet, porém, no exemplo com o Docker, o ambiente foi distribuído em 3 container:
+- Neste projeto, foi provisionado um ambiente contendo o mesmo site utilizado no exemplo de Vagrant+Puppet, porém, no exemplo com o Docker, o ambiente foi distribuído em 3 containers:
   - Um container do servidor web NGINX
   - Um segundo container rodando o PHP com o driver PDO (PHP Data Object)
   - E um terceiro container rodando o MySQL Server
 - As imagens utilizadas no projeto foram baixadas do Docker Hub, sendo que a imagem do PHP não vem com o driver PDO instalado. Sendo assim, utilizou-se o docker build para criar, a partir da imagem oficial do PHP, uma nova imagem contendo o PHP e o PDO.
+- Dentro da pasta  1-exemplo_pratico/docker/ você irá encontrar o seguinte conteúdo:
+  - Arquivo site.conf - Este é um arquivo de configuração do NGINX, que informa ao servidor web qual é o nome da aplicação, onde ela deve procurar o index do site, onde devem ser salvos os arquivos de log, dentre outras configurações.
+  - Arquivo Dockerfile - Esté o arquivo utilzado para fazer o build de nossa imagem do PHP. Neste arquivo constam as instruções para que o comando "docker build" possa baixar a imagem do PHP, instalar o driver PDO e criar uma nova imagem que aqui chamamos de "php-pdo-carryon".
+  - Arquivo docker-compose.yml - Neste arquivo estão todas as instruções para a composição do ambiente. Nele, cada container é tratado como um serviço. Sendo assim, em cada um desses serviços são especificados: A imagem utilizada para rodar o container, o nome do container, a porta a ser exposta, variáveis de ambiente, volumes compartilhados, dentre outras configurações.
 
 
