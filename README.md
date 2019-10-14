@@ -27,3 +27,10 @@ Neste repositório, estão os arquivos utilizados durante a apresentação e dem
 
 
 # Docker, docker build e Docker Compose
+- Neste projeto, foi provisionado um ambiente contendo o mesmo site utilizado no exemplo de Vagrant+Puppet, porém, no exemplo com o Docker, o ambiente foi distribuído em 3 container:
+  - Um container do servidor web NGINX
+  - Um segundo container rodando o PHP com o driver PDO (PHP Data Object)
+  - E um terceiro container rodando o MySQL Server
+- As imagens utilizadas no projeto foram baixadas do Docker Hub, sendo que a imagem do PHP não vem com o driver PDO instalado. Sendo assim, utilizou-se o docker build para criar, a partir da imagem oficial do PHP, uma nova imagem contendo o PHP e o PDO.
+
+
